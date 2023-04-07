@@ -15,15 +15,35 @@ void selectionSort(int arr[], int n) {
     }
 }
 
-int main() {
-    int arr[] = {64, 25, 12, 22, 11};
-    int n = sizeof(arr)/sizeof(arr[0]);
+void nhapMang(int arr[], int n) {
+    for(int i = 0; i < n; i++) {
+        cout << "Nhap gia tri arr[" << i << "]: ";
+        cin >> arr[i];
+    }
+}
 
-    selectionSort(arr, n);
-
-    cout << "Mang sau khi sap xep: \n";
+void xuatMang(int arr[], int n) {
     for(int i = 0; i < n; i++) {
         cout << arr[i] << " ";
     }
+    cout << endl;
+}
+
+int main() {
+    int n;
+    cout << "Nhap so phan tu cua mang: ";
+    cin >> n;
+    int arr[n];
+
+    nhapMang(arr, n);
+
+    cout << "Mang truoc khi sap xep: ";
+    xuatMang(arr, n);
+
+    selectionSort(arr, n);
+
+    cout << "Mang sau khi sap xep: ";
+    xuatMang(arr, n);
+
     return 0;
 }

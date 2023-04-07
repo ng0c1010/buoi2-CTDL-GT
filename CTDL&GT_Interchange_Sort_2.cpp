@@ -1,29 +1,47 @@
 #include <iostream>
 using namespace std;
-// nguon tham khao: chat GPT
+
 void interchangeSort(int arr[], int n) {
     for(int i = 0; i < n-1; i++) {
-        int minIndex = i;
         for(int j = i+1; j < n; j++) {
-            if(arr[j] < arr[minIndex]) {
-                minIndex = j;
+            if(arr[j] < arr[i]) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
             }
         }
-        int temp = arr[i];
-        arr[i] = arr[minIndex];
-        arr[minIndex] = temp;
     }
 }
 
-int main() {
-    int arr[] = {10, 10, 20, 03, 11};
-    int n = sizeof(arr)/sizeof(arr[0]);
+void nhapMang(int arr[], int n) {
+    for(int i = 0; i < n; i++) {
+        cout << "Nhap gia tri arr[" << i << "]: ";
+        cin >> arr[i];
+    }
+}
 
-    interchangeSort(arr, n);
-
-    cout << "Mang sau khi sap xep: \n";
+void xuatMang(int arr[], int n) {
     for(int i = 0; i < n; i++) {
         cout << arr[i] << " ";
     }
+    cout << endl;
+}
+
+int main() {
+    int n;
+    cout << "Nhap so phan tu cua mang: ";
+    cin >> n;
+    int arr[n];
+
+    nhapMang(arr, n);
+
+    cout << "Mang truoc khi sap xep: ";
+    xuatMang(arr, n);
+
+    interchangeSort(arr, n);
+
+    cout << "Mang sau khi sap xep: ";
+    xuatMang(arr, n);
+
     return 0;
 }

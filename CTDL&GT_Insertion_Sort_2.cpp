@@ -1,30 +1,50 @@
 #include <iostream>
 using namespace std;
 
-void insertionSort(int arr[], int n) {
-    int key, j;
-    for(int i = 1; i < n; i++) {
-        key = arr[i];
-        j = i - 1;
-
-        while(j >= 0 && arr[j] > key) {
-            arr[j+1] = arr[j];
-            j = j - 1;
+void selectionSort(int arr[], int n) {
+    for(int i = 0; i < n-1; i++) {
+        int minIndex = i;
+        for(int j = i+1; j < n; j++) {
+            if(arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
         }
-        arr[j+1] = key;
+        int temp = arr[i];
+        arr[i] = arr[minIndex];
+        arr[minIndex] = temp;
     }
 }
 
-int main() {
-    int arr[] = {64, 25, 12, 22, 11};
-    int n = sizeof(arr)/sizeof(arr[0]);
+void nhapMang(int arr[], int n) {
+    for(int i = 0; i < n; i++) {
+        cout << "Nhap gia tri arr[" << i << "]: ";
+        cin >> arr[i];
+    }
+}
 
-    insertionSort(arr, n);
-
-    cout << "Mang sau khi sap xep: \n";
+void xuatMang(int arr[], int n) {
     for(int i = 0; i < n; i++) {
         cout << arr[i] << " ";
     }
+    cout << endl;
+}
+
+int main() {
+    int n;
+    cout << "Nhap so phan tu cua mang: ";
+    cin >> n;
+    int arr[n];
+
+    nhapMang(arr, n);
+
+    cout << "Mang truoc khi sap xep: ";
+    xuatMang(arr, n);
+
+    selectionSort(arr, n);
+
+    cout << "Mang sau khi sap xep: ";
+    xuatMang(arr, n);
+
     return 0;
 }
 

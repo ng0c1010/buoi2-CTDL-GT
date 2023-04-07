@@ -1,31 +1,49 @@
 #include <iostream>
+#include <algorithm> // Thu vi?n cho hàm sort()
 using namespace std;
 
-int binarySearch(int arr[], int n, int target) {
-    int left = 0;
-    int right = n - 1;
-    while (left <= right) {
+int binarySearch(int arr[], int left, int right, int x) {
+    if(right >= left) {
         int mid = left + (right - left) / 2;
-        if (arr[mid] == target) {
+        if(arr[mid] == x) {
             return mid;
-        } else if (arr[mid] < target) {
-            left = mid + 1;
-        } else {
-            right = mid - 1;
         }
+        if(arr[mid] > x) {
+            return binarySearch(arr, left, mid - 1, x);
+        }
+        return binarySearch(arr, mid + 1, right, x);
     }
     return -1;
 }
 
-int main() {
-    int arr[] = {2, 4, 6, 8, 10};
-    int target = 8;
-    int n = sizeof(arr) / sizeof(arr[0]);
-    int result = binarySearch(arr, n, target);
-    if (result == -1) {
-        cout << "Element not found" << endl;
-    } else {
-        cout << "Element found at index " << result << endl;
+void nhapMang(int arr[], int n) {
+    for(int i = 0; i < n; i++) {
+        cout << "Nhap gia tri arr[" << i << "]: ";
+        cin >> arr[i];
     }
+}
+
+int main() {
+    int n;
+    cout << "Nhap so phan tu cua mang: ";
+    cin >> n;
+    int arr[n];
+
+    nhapMang(arr, n);
+    // S?p x?p m?ng tru?c khi tìm ki?m nh? phân
+    sort(arr, arr+n);
+
+    int x;
+    cout << "Nhap gia tri can tim: ";
+    cin >> x;
+
+    int result = binarySearch(arr, 0, n-1, x);
+    if(result == -1) {
+        cout << "Khong tim thay " << x << " trong mang.\n";
+    }
+    else {
+        cout << "Tim thay " << x << " tai vi tri " << result << ".\n";
+    }
+
     return 0;
 }
